@@ -6,6 +6,7 @@
 #include "NumericEditApp.h"
 #include "NumericEditAppDlg.h"
 #include "afxdialogex.h"
+#include "DlgGetData.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -64,6 +65,7 @@ BEGIN_MESSAGE_MAP(CNumericEditAppDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDOK, &CNumericEditAppDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -99,6 +101,45 @@ BOOL CNumericEditAppDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+
+	// NumericEdit: Attach edit controls
+	m_Integer.AttachEdit(IDC_EDIT1, this);
+	m_IntegerPositive.AttachEdit(IDC_EDIT2, this);
+	m_IntegerRange.AttachEdit(IDC_EDIT3, this);
+	m_Decimal.AttachEdit(IDC_EDIT4, this);
+	m_DecimalPositive.AttachEdit(IDC_EDIT5, this);
+	m_DecimalRange.AttachEdit(IDC_EDIT6, this);
+
+	// NumericEdit: Configure edits
+	// integer value
+	m_Integer.SetDecimalInput(FALSE);
+	m_Integer.SetDefaultValue(10);
+	m_Integer.SetData(360); // set initial value
+
+	// integer positive value
+	m_IntegerPositive.SetDecimalInput(FALSE);
+	m_IntegerPositive.SetNegativeInput(FALSE);
+	m_IntegerPositive.SetDefaultValue(-5);
+	m_IntegerPositive.SetData(0); // set initial value
+
+	// integer with range value (-100 to 100)
+	m_IntegerRange.SetDecimalInput(FALSE);
+	m_IntegerRange.SetDefaultValue(50);
+	m_IntegerRange.SetMinValue(-100);
+	m_IntegerRange.SetMaxValue(100);
+	m_IntegerRange.SetData(10.99); // set initial value
+
+	// decimal value
+	m_Decimal.SetData(0); // set initial value
+
+	// decimal positive value
+	m_DecimalPositive.SetNegativeInput(FALSE);
+	m_DecimalPositive.SetData(1.25); // set initial value
+
+	// decimal with range value (-10.50 to 500.0)
+	m_DecimalRange.SetMinValue(-10.50);
+	m_DecimalRange.SetMaxValue(500.0);
+	m_DecimalRange.SetData(5.67); // set initial value
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -152,3 +193,27 @@ HCURSOR CNumericEditAppDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+void CNumericEditAppDlg::OnBnClickedOk()
+{
+	CDlgGetData dlgGetData;
+
+	m_Integer.GetData(dlgGetData.m_dInteger);
+	m_Integer.GetWindowText(dlgGetData.m_sInteger);
+
+	m_IntegerPositive.GetData(dlgGetData.m_dIntegerPositive);
+	m_IntegerPositive.GetWindowText(dlgGetData.m_sIntegerPositive);
+
+	m_IntegerRange.GetData(dlgGetData.m_dIntegerRange);
+	m_IntegerRange.GetWindowText(dlgGetData.m_sIntegerRange);
+
+	m_Decimal.GetData(dlgGetData.m_dDecimal);
+	m_Decimal.GetWindowText(dlgGetData.m_sDecimal);
+
+	m_DecimalPositive.GetData(dlgGetData.m_dDecimalPositive);
+	m_DecimalPositive.GetWindowText(dlgGetData.m_sDecimalPositive);
+
+	m_DecimalRange.GetData(dlgGetData.m_dDecimalRange);
+	m_DecimalRange.GetWindowText(dlgGetData.m_sDecimalRange);
+
+	dlgGetData.DoModal();
+}

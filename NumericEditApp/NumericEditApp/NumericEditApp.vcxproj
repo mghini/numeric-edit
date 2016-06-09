@@ -182,6 +182,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DlgGetData.h" />
+    <ClInclude Include="NumericEdit.h" />
     <ClInclude Include="NumericEditApp.h" />
     <ClInclude Include="NumericEditAppDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -189,6 +191,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DlgGetData.cpp" />
+    <ClCompile Include="NumericEdit.cpp" />
     <ClCompile Include="NumericEditApp.cpp" />
     <ClCompile Include="NumericEditAppDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -210,4 +214,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="NumericEditApp.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include "numericedit.h"
+
 
 // CNumericEditAppDlg dialog
 class CNumericEditAppDlg : public CDialogEx
@@ -20,6 +22,14 @@ public:
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 
+	// NumericEdit controls
+	CNumericEdit m_Integer;
+	CNumericEdit m_IntegerPositive;
+	CNumericEdit m_IntegerRange;
+
+	CNumericEdit m_Decimal;
+	CNumericEdit m_DecimalPositive;
+	CNumericEdit m_DecimalRange;
 
 // Implementation
 protected:
@@ -31,4 +41,6 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedOk();
 };
